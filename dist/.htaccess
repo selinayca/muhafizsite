@@ -1,0 +1,107 @@
+# MUHAFIZ · Apache yapılandırması (paylaşımlı hosting, public_html kökü)
+# Her blok IfModule ile sarılı: hosting bir modülü kapatmışsa site 500 vermez,
+# sadece o özellik devre dışı kalır.
+
+Options -Indexes
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+
+# ---------------------------------------------------------------------------
+# 1) Yönlendirme: www'suz ve HTTPS tek adres (https://muhafiz.site)
+#    Önce www → çıplak alan adı, sonra http → https. X-Forwarded-Proto kontrolü,
+#    SSL'i önde bir vekil sunucuda (Cloudflare vb.) sonlandıran hostlarda
+#    sonsuz yönlendirme döngüsünü önler.
+# ---------------------------------------------------------------------------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # /index.html → / (canonical ile aynı adres)
+  RewriteCond %{THE_REQUEST} \s/+index\.html[\s?] [NC]
+  RewriteRule ^index\.html$ / [L,R=301]
+</IfModule>
+
+# ---------------------------------------------------------------------------
+# 2) Doğru MIME türleri (bazı eski hostlarda eksik)
+# ---------------------------------------------------------------------------
+<IfModule mod_mime.c>
+  AddType font/woff2 .woff2
+  AddType image/svg+xml .svg
+  AddType application/manifest+json .webmanifest
+  AddType image/x-icon .ico
+  AddCharset utf-8 .html .css .js .txt .xml .webmanifest .svg
+</IfModule>
+
+# ---------------------------------------------------------------------------
+# 3) Sıkıştırma: varsa Brotli, yoksa gzip (woff2 ve png zaten sıkıştırılmış)
+# ---------------------------------------------------------------------------
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/css text/plain text/xml application/javascript text/javascript application/json application/manifest+json application/xml image/svg+xml image/x-icon
+</IfModule>
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript text/javascript application/json application/manifest+json application/xml image/svg+xml image/x-icon
+</IfModule>
+
+# ---------------------------------------------------------------------------
+# 4) Önbellek
+#    css/js adlarında sürüm var (style.v1.css) → 1 yıl, immutable.
+#    Fontlar değişmez → 1 yıl. Görseller sürümsüz → 30 gün.
+#    HTML her zaman tazelensin ki yeni sürüm dosya adları hemen görülsün.
+# ---------------------------------------------------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 hour"
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType text/javascript "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 30 days"
+  ExpiresByType image/png "access plus 30 days"
+  ExpiresByType image/x-icon "access plus 30 days"
+  ExpiresByType application/manifest+json "access plus 7 days"
+</IfModule>
+<IfModule mod_headers.c>
+  <FilesMatch "\.v[0-9]+\.(css|js)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.woff2$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.(html|php)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
+
+# ---------------------------------------------------------------------------
+# 5) Güvenlik başlıkları
+#    CSP sıkı: sayfada satır içi script/stil yok, her şey kendi alanımızdan.
+#    (JSON-LD bir veri bloğudur, çalıştırılmaz; CSP onu engellemez.)
+# ---------------------------------------------------------------------------
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "DENY"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+
+  # HSTS: SSL sertifikasının alan adında ve www'da sorunsuz çalıştığını
+  # doğruladıktan sonra açın. Açıldıktan sonra geri almak zordur.
+  # Header always set Strict-Transport-Security "max-age=31536000"
+</IfModule>
+
+# ---------------------------------------------------------------------------
+# 6) Gizli dosyalar (.git, .env vb.) dışarıya kapalı
+# ---------------------------------------------------------------------------
+<IfModule mod_authz_core.c>
+  <FilesMatch "^\.">
+    Require all denied
+  </FilesMatch>
+</IfModule>

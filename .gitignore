@@ -1,0 +1,7 @@
+# Herkese açık depoya girmeyecekler
+*.pptx
+taslak/
+arsiv/
+
+# macOS
+.DS_Store

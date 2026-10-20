@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MUHAFIZ · Bina için deprem ve yangın erken uyarı sistemi</title>
+  <meta name="description" content="Muhafız; deprem ve yangın anında gaz, elektrik ve asansöre güvenlik sinyali gönderen, binanın onaylı sakinlerine siren sesli kritik bildirim yollayan bina erken uyarı ve acil durum haberleşme sistemi.">
+  <link rel="canonical" href="https://muhafiz.site/">
+  <meta name="theme-color" content="#070D17">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="tr_TR">
+  <meta property="og:site_name" content="MUHAFIZ">
+  <meta property="og:url" content="https://muhafiz.site/">
+  <meta property="og:title" content="MUHAFIZ · Afet anında bina kendini korur, sakinler birbirine ulaşır">
+  <meta property="og:description" content="Bina erken uyarı, otomatik güvenlik ve acil durum haberleşme sistemi.">
+  <meta property="og:image" content="https://muhafiz.site/assets/img/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="MUHAFIZ logosu ve “Afet anında bina kendini korur, sakinler birbirine ulaşır.” yazısı">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MUHAFIZ · Bina erken uyarı sistemi">
+  <meta name="twitter:description" content="Afet anında bina kendini korur, sakinler birbirine ulaşır.">
+  <meta name="twitter:image" content="https://muhafiz.site/assets/img/og-image.png">
+
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <link rel="preload" href="assets/fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/style.v4.css">
+  <script src="assets/js/app.v3.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://muhafiz.site/#org",
+        "name": "MUHAFIZ",
+        "url": "https://muhafiz.site/",
+        "logo": "https://muhafiz.site/assets/img/icons/icon-512.png"
+      },
+      {
+        "@type": "Product",
+        "name": "MUHAFIZ Bina Ünitesi ve erken uyarı sistemi",
+        "description": "Her binaya bir cihaz: sarsıntı, sıcaklık, akü ve şebeke izleme; WiFi ana, 4G yedek bağlantı; yerel siren. Sakinlere siren sesli kritik bildirim, yönetici ve bayi panelleri.",
+        "category": "Bina güvenlik ve erken uyarı sistemi",
+        "brand": { "@id": "https://muhafiz.site/#org" },
+        "image": "https://muhafiz.site/assets/img/og-image.png"
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <!-- İkon seti: 24px ızgara, 1.75 kontur, yuvarlak uçlar. Tek yerde tanımlı, <use> ile çağrılır. -->
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-quake" viewBox="0 0 24 24"><path d="M2 12h3l2.5-5 3.5 10 3-13 3 11 1.5-3H22"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12L13 2z"/></symbol>
+    <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 3c.6 2.8 4.5 5 4.5 9.5a4.5 4.5 0 0 1-9 0c0-2.3 1.4-3.3 1.8-5 .9 1 1.6 1.6 2.4 1.8C12.3 7.4 11.4 5.2 12 3z"/></symbol>
+    <symbol id="i-elevator" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="m9 10 3-3 3 3M9 14l3 3 3-3"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 9a6 6 0 1 1 12 0c0 6 2.5 8 2.5 8h-17S6 15 6 9z"/><path d="M10.3 20.5a2 2 0 0 0 3.4 0"/></symbol>
+    <symbol id="i-phone-check" viewBox="0 0 24 24"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="m9.5 12 2 2 3.5-4"/></symbol>
+    <symbol id="i-battery" viewBox="0 0 24 24"><rect x="2.5" y="7" width="16" height="10" rx="2"/><path d="M21.5 10.5v3M6.5 10v4M10 10v4"/></symbol>
+    <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9" y="9" width="6" height="6" rx="1"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></symbol>
+    <symbol id="i-server" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M11 18h2"/></symbol>
+    <symbol id="i-thermo" viewBox="0 0 24 24"><path d="M14 14.8V4.5a2 2 0 0 0-4 0v10.3a4 4 0 1 0 4 0z"/></symbol>
+    <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M2 8.8a15 15 0 0 1 20 0M5 12.6a10.5 10.5 0 0 1 14 0M8.5 16.3a5.5 5.5 0 0 1 7 0M12 20h.01"/></symbol>
+    <symbol id="i-display" viewBox="0 0 24 24"><rect x="2.5" y="4" width="19" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></symbol>
+    <symbol id="i-siren" viewBox="0 0 24 24"><path d="M11 5 6 9H2.5v6H6l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9.5 9.5 0 0 1 0 13"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1L3.5 8.5"/><path d="M3.5 3.5v5h5"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5-12-7.5z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5a7 7 0 0 0-14 0C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14.2a6.5 6.5 0 0 1 3.5 5.8"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="m3 6.5 9 6.5 9-6.5"/></symbol>
+    <symbol id="i-call" viewBox="0 0 24 24"><path d="M5 3.5h3.5l1.8 4.5-2.3 1.4a11 11 0 0 0 6.6 6.6l1.4-2.3 4.5 1.8V19a1.5 1.5 0 0 1-1.5 1.5A17 17 0 0 1 3.5 5 1.5 1.5 0 0 1 5 3.5z"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 18.5V5a2 2 0 0 1 2-2h14v14H6a2 2 0 0 0-2 2 2 2 0 0 0 2 2h14"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24"><path d="M3 21h18M5 21V4.5A1.5 1.5 0 0 1 6.5 3h7A1.5 1.5 0 0 1 15 4.5V21M15 9h3.5A1.5 1.5 0 0 1 20 10.5V21M9 7h2M9 11h2M9 15h2"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4V5z"/></symbol>
+    <symbol id="i-sos" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5M12 16h.01"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  </svg>
+
+  <a class="skip-link" href="#icerik">İçeriğe geç</a>
+
+  <header class="site-header" data-header>
+    <div class="container site-header__inner">
+      <a class="site-header__brand" href="#ust" aria-label="MUHAFIZ, sayfa başı">
+        <img src="assets/img/muhafiz-logo-dark.svg" width="168" height="50" alt="">
+        <span class="live-dot" aria-hidden="true" title="Sistem çevrimiçi"></span>
+      </a>
+      <nav class="site-nav" id="site-nav" aria-label="Ana menü" data-nav>
+        <div class="site-nav__head">
+          <img src="assets/img/muhafiz-symbol-dark.svg" width="32" height="37" alt="">
+          <button class="icon-btn" type="button" data-nav-close aria-label="Menüyü kapat">
+            <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+          </button>
+        </div>
+        <ul class="site-nav__list">
+          <li><a href="#ozellikler">Özellikler</a></li>
+          <li><a href="#simulasyon" class="nav-live">Canlı Simülasyon</a></li>
+          <li><a href="#cihaz">Cihaz</a></li>
+          <li><a href="#nasil-calisir">Nasıl Çalışır</a></li>
+          <li><a href="#uygulama">Uygulama</a></li>
+          <li><a href="#teklif">Teklif</a></li>
+        </ul>
+        <a class="btn btn--primary site-nav__cta" href="#teklif">Teklif Al</a>
+      </nav>
+      <a class="btn btn--primary btn--sm site-header__cta" href="#teklif">Teklif Al</a>
+      <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menüyü aç" data-nav-toggle>
+        <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="icerik">
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="ust" aria-labelledby="hero-title" data-anim>
+      <div class="container hero__inner">
+        <p class="status-pill"><span class="live-dot" aria-hidden="true" title="Sistem çevrimiçi"></span>Sistem durumu: <strong>İzlemede</strong></p>
+        <h1 class="hero__title" id="hero-title">Afet anında bina <span class="accent">kendini korur</span>, sakinler birbirine ulaşır.</h1>
+        <p class="hero__lead">Muhafız; sarsıntıyı ve sıcaklığı izleyen, deprem ve yangın anında gaz, elektrik ve asansöre güvenlik sinyali gönderen ve binadaki herkesin telefonuna siren sesli bildirim yollayan bina erken uyarı sistemidir.</p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#simulasyon" data-sim-start="deprem">
+            <svg class="icon" aria-hidden="true"><use href="#i-play"/></svg>Canlı simülasyonu başlat
+          </a>
+          <a class="btn btn--ghost" href="#ozellikler">Sistemi keşfet<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+      <!-- İmza: sayfa genişliğinde sismograf. Düz akar; birkaç saniyede bir sakin bir titreşim. -->
+      <svg class="seismo" viewBox="0 0 1440 80" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+        <path class="seismo__base" d="M0 40H1440"/>
+        <g transform="translate(0 40)">
+          <path class="seismo__wave" d="M540,-0.0 L543,-0.0 L546,-0.0 L549,-0.1 L552,-0.0 L555,0.1 L558,0.4 L561,0.5 L564,0.4 L567,-0.2 L570,-1.0 L573,-1.4 L576,-1.1 L579,-0.0 L582,1.5 L585,2.5 L588,2.4 L591,0.8 L594,-1.6 L597,-3.6 L600,-4.0 L603,-2.2 L606,1.2 L609,4.5 L612,5.8 L615,4.1 L618,0.0 L621,-4.7 L624,-7.4 L627,-6.5 L630,-2.0 L633,4.1 L636,8.6 L639,8.9 L642,4.6 L645,-2.5 L648,-8.8 L651,-11.0 L654,-7.6 L657,-0.0 L660,8.1 L663,12.4 L666,10.5 L669,3.1 L672,-6.2 L675,-12.7 L678,-13.0 L681,-6.6 L684,3.4 L687,12.0 L690,14.6 L693,9.8 L696,0.0 L699,-10.0 L702,-15.1 L705,-12.6 L708,-3.7 L711,7.1 L714,14.4 L717,14.3 L720,7.1 L723,-3.6 L726,-12.5 L729,-15.0 L732,-9.9 L735,-0.0 L738,9.7 L741,14.4 L744,11.8 L747,3.4 L750,-6.4 L753,-12.7 L756,-12.5 L759,-6.1 L762,3.1 L765,10.3 L768,12.1 L771,7.9 L774,0.0 L777,-7.4 L780,-10.7 L783,-8.6 L786,-2.4 L789,4.5 L792,8.7 L795,8.3 L798,4.0 L801,-1.9 L804,-6.4 L807,-7.3 L810,-4.6 L813,0.0 L816,4.1 L819,5.8 L822,4.5 L825,1.2 L828,-2.2 L831,-4.1 L834,-3.8 L837,-1.7 L840,0.8 L843,2.5 L846,2.7 L849,1.6 L852,0.0 L855,-1.3 L858,-1.7 L861,-1.2 L864,-0.3 L867,0.5 L870,0.8 L873,0.7 L876,0.3 L879,-0.1 L882,-0.3 L885,-0.2 L888,-0.1 L891,-0.0 L894,0.0 L897,0.0 L900,0.0"/>
+        </g>
+      </svg>
+    </section>
+
+    <!-- ============ RAKAM ŞERİDİ ============ -->
+    <section class="figures" aria-labelledby="figures-title">
+      <div class="container">
+        <h2 class="visually-hidden" id="figures-title">Kısaca Muhafız</h2>
+        <ul class="figures__list" data-counters>
+          <li class="figure figure--amber"><span class="figure__num">&lt;&#8202;<span data-count="10">10</span>&nbsp;sn</span><span class="figure__label">uçtan uca bildirim hedefi</span></li>
+          <li class="figure figure--blue"><span class="figure__num">WiFi + 4G</span><span class="figure__label">çift bağlantı</span></li>
+          <li class="figure figure--emerald"><span class="figure__num">1 : 1</span><span class="figure__label">her binaya bir cihaz</span></li>
+          <li class="figure figure--rose"><span class="figure__num"><span data-count="359">359</span></span><span class="figure__label">otomatik test senaryosu</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ NEDEN MUHAFIZ ============ -->
+    <section class="section" id="ozellikler" aria-labelledby="features-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="label">Neden Muhafız</p>
+          <h2 id="features-title">Algılar, binayı güvenli duruma alır, <span class="accent">herkese haber verir</span>.</h2>
+        </header>
+        <ul class="grid grid--3">
+          <li class="card card--hover card--amber">
+            <span class="card__icon"><svg class="icon" aria-hidden="true"><use href="#i-quake"/></svg></span>
+            <h3 class="card__title">Sarsıntı algılama</h3>
+            <p>İki sarsıntı sensörü (A/B) sürekli ölçer. En yüksek değer eşiği aşınca alarm açılır.</p>
+          </li>
+          <li class="card card--hover card--orange">
+            <span class="card__icon"><svg class="icon" aria-hidden="true"><use href="#i-bolt"/></svg></span>
+            <h3 class="card__title">Gaz ve elektrik güvenlik sinyali</h3>
+            <p>Alarm anında cihaz doğalgaz ve elektrik için kesme sinyali gönderir.</p>
+            <p class="tag">İlk faz: kayıt/simülasyon modu</p>
+          </li>
+          <li class="card card--hover card--blue">
+            <span class="card__icon"><svg class="icon" aria-hidden="true"><use href="#i-elevator"/></svg></span>
+            <h3 class="card__title">Asansör güvenli mod</h3>
+            <p>Asansör güvenli moda alınır ve en yakın katta durur.</p>
+            <p class="tag">İlk faz: kayıt/simülasyon modu</p>
+          </li>
+          <li class="card card--hover card--red">
+            <span class="card__icon"><svg class="icon" aria-hidden="true"><use href="#i-bell"/></svg></span>
+            <h3 class="card__title">Siren sesli kritik bildirim</h3>
+            <p>Binada yerel siren çalar; o binanın onaylı sakinlerinin telefonuna siren sesli kritik push bildirimi gider.</p>
+          </li>
+          <li class="card card--hover card--emerald">
+            <span class="card__icon"><svg class="icon" aria-hidden="true"><use href="#i-phone-check"/></svg></span>
+            <h3 class="card__title">Tek dokunuşla durum bildirimi</h3>
+            <p>Sakin “Güvendeyim” ya da “Yardım istiyorum” der; konumu yönetime iletilir. En fazla 5 acil kişisine kendi telefonundan SMS / WhatsApp ile haber verebilir.</p>
+          </li>
+          <li class="card card--hover card--indigo">
+            <span class="card__icon"><svg class="icon" aria-hidden="true"><use href="#i-battery"/></svg></span>
+            <h3 class="card__title">Akü, şebeke ve 4G yedek</h3>
+            <p>Cihaz şebekeyi ve aküyü izler; WiFi giderse 4G yedek hatla bağlanır. 5 dakika veri göndermeyen cihaz çevrimdışı işaretlenir, yöneticiye haber gider.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ CANLI SİMÜLASYON ============
+         JS yokken bu işaretleme deprem senaryosunun SON durumunu gösterir.
+         JS açılınca app.v*.js paneli başlangıç durumuna sıfırlar. -->
+    <section class="section section--surface" id="simulasyon" aria-labelledby="sim-title">
+      <div class="container">
+        <header class="section-head section-head--center">
+          <p class="label label--amber">İnteraktif kontrol paneli</p>
+          <h2 id="sim-title">Canlı tehlike simülasyonu</h2>
+          <p class="section-head__lead">Bir senaryo seçin; Muhafız’ın alarm anında sırasıyla attığı adımları ve binanın durumunu adım adım izleyin.</p>
+        </header>
+
+        <div class="sim" data-sim data-scenario="deprem" data-phase="done">
+          <div class="sim__bar">
+            <div class="sim__scenarios" role="group" aria-label="Senaryo seçimi">
+              <button class="btn btn--scenario btn--quake" type="button" data-scenario-btn="deprem" aria-pressed="true">
+                <svg class="icon" aria-hidden="true"><use href="#i-quake"/></svg><span>Deprem<span class="hide-sm"> senaryosu</span></span>
+              </button>
+              <button class="btn btn--scenario btn--fire" type="button" data-scenario-btn="yangin" aria-pressed="false">
+                <svg class="icon" aria-hidden="true"><use href="#i-thermo"/></svg><span>Yangın<span class="hide-sm"> senaryosu</span></span>
+              </button>
+            </div>
+            <button class="btn btn--ghost btn--sm" type="button" data-sim-reset>
+              <svg class="icon" aria-hidden="true"><use href="#i-reset"/></svg>Sıfırla
+            </button>
+            <p class="sim__nojs">Senaryoyu oynatmak için JavaScript gerekir. Aşağıda deprem senaryosunun son durumu görünüyor.</p>
+          </div>
+
+          <div class="sim__body">
+            <!-- Sol: adımlar -->
+            <div class="sim__steps">
+              <h3 class="panel-title">Otomatik güvenlik adımları</h3>
+              <ol class="steps" data-steps>
+                <li class="step" data-state="done"><span class="step__num">1</span><div class="step__text"><strong>Sarsıntı algılandı</strong><span>İki sensörden en yüksek değer eşiği aştı; alarm açıldı.</span></div><span class="badge badge--done"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>TAMAMLANDI</span></li>
+                <li class="step" data-state="done"><span class="step__num">2</span><div class="step__text"><strong>Gaz ve elektrik kesme sinyali gönderildi</strong><span>Doğalgaz ve elektrik için güvenlik sinyali.</span></div><span class="badge badge--done"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>TAMAMLANDI</span></li>
+                <li class="step" data-state="done"><span class="step__num">3</span><div class="step__text"><strong>Asansör güvenli moda alındı</strong><span>Kabin en yakın katta durdu, kapı açıldı.</span></div><span class="badge badge--done"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>TAMAMLANDI</span></li>
+                <li class="step" data-state="done"><span class="step__num">4</span><div class="step__text"><strong>Siren çalıyor, kritik bildirim gitti</strong><span>Binanın onaylı sakinlerinin telefonuna siren sesli push.</span></div><span class="badge badge--done"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>TAMAMLANDI</span></li>
+                <li class="step" data-state="done"><span class="step__num">5</span><div class="step__text"><strong>Sakinler durum bildiriyor</strong><span>Güvendeyim / Yardım istiyorum yanıtları yönetime düşer.</span></div><span class="badge badge--done"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>TAMAMLANDI</span></li>
+              </ol>
+              <p class="note">Gösterim amaçlıdır. İlk fazda gaz, elektrik ve asansör sinyalleri kayıt/simülasyon modunda çalışır.</p>
+            </div>
+
+            <!-- Sağ: bina canlı durumu -->
+            <div class="sim__live">
+              <div class="live-head">
+                <h3 class="panel-title">Bina canlı durumu <span class="live-head__bldg">A Blok</span></h3>
+                <span class="badge badge--safe-mode" data-sim-badge><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>GÜVENLİ MOD</span>
+              </div>
+
+              <div class="building-wrap">
+                <svg class="building is-alarm" viewBox="0 0 320 352" role="img" aria-labelledby="bldg-desc" data-building>
+                  <title id="bldg-desc">Altı katlı bina kesiti: her katta iki daire, sağda asansör boşluğu</title>
+                  <!-- Çatıdaki sinyal: logodaki iki yay -->
+                  <g class="building__signal" transform="translate(94 -9) scale(.72)">
+                    <path d="M41.42,21.3A11.2,11.2 0 0 1 58.58,21.3A2.7,2.7 0 0 1 54.44,24.77A5.8,5.8 0 0 0 45.56,24.77A2.7,2.7 0 0 1 41.42,21.3ZM35.36,15.32A19.7,19.7 0 0 1 64.64,15.32A2.7,2.7 0 0 1 60.63,18.93A14.3,14.3 0 0 0 39.37,18.93A2.7,2.7 0 0 1 35.36,15.32Z"/>
+                  </g>
+                  <g class="building__frame">
+                    <rect x="24" y="40" width="200" height="300" rx="4"/>
+                    <path d="M24 90h200M24 140h200M24 190h200M24 240h200M24 290h200"/>
+                    <rect class="building__shaft" x="236" y="40" width="48" height="300" rx="4"/>
+                  </g>
+                  <g class="building__labels" aria-hidden="true">
+                    <text x="12" y="70">6</text><text x="12" y="120">5</text><text x="12" y="170">4</text><text x="12" y="220">3</text><text x="12" y="270">2</text><text x="12" y="320">1</text>
+                  </g>
+                  <!-- Daireler: D1 (1. kat sol) … D12 (6. kat sağ) -->
+                  <g class="building__apts">
+                    <rect class="apt is-safe" x="44" y="302" width="64" height="26" rx="4"/>
+                    <rect class="apt" x="140" y="302" width="64" height="26" rx="4"/>
+                    <rect class="apt is-safe" x="44" y="252" width="64" height="26" rx="4"/>
+                    <rect class="apt is-safe" x="140" y="252" width="64" height="26" rx="4"/>
+                    <rect class="apt is-safe" x="44" y="202" width="64" height="26" rx="4"/>
+                    <rect class="apt is-safe" x="140" y="202" width="64" height="26" rx="4"/>
+                    <rect class="apt is-help" x="44" y="152" width="64" height="26" rx="4"/>
+                    <rect class="apt is-safe" x="140" y="152" width="64" height="26" rx="4"/>
+                    <rect class="apt is-safe" x="44" y="102" width="64" height="26" rx="4"/>
+                    <rect class="apt is-safe" x="140" y="102" width="64" height="26" rx="4"/>
+                    <rect class="apt" x="44" y="52" width="64" height="26" rx="4"/>
+                    <rect class="apt is-safe" x="140" y="52" width="64" height="26" rx="4"/>
+                  </g>
+                  <!-- Asansör kabini: konumu yalnızca transform ile değişir -->
+                  <g class="cabin is-at-floor is-open" data-cabin>
+                    <rect class="cabin__box" x="242" y="0" width="36" height="40" rx="3"/>
+                    <rect class="cabin__door cabin__door--l" x="244" y="4" width="16" height="34" rx="1"/>
+                    <rect class="cabin__door cabin__door--r" x="260" y="4" width="16" height="34" rx="1"/>
+                  </g>
+                </svg>
+              </div>
+
+              <ul class="systems">
+                <li class="system" data-system="power" data-state="cut"><svg class="icon" aria-hidden="true"><use href="#i-bolt"/></svg><span class="system__name">Şebeke</span><span class="system__val">Kesildi</span></li>
+                <li class="system" data-system="gas" data-state="cut"><svg class="icon" aria-hidden="true"><use href="#i-flame"/></svg><span class="system__name">Doğalgaz</span><span class="system__val">Kesildi</span></li>
+                <li class="system" data-system="lift" data-state="safe"><svg class="icon" aria-hidden="true"><use href="#i-elevator"/></svg><span class="system__name">Asansör</span><span class="system__val">Güvenli katta · Kapı: Açık</span></li>
+              </ul>
+
+              <div class="notify-slot">
+                <div class="notify is-in" data-notify>
+                  <img src="assets/img/muhafiz-symbol-dark.svg" width="28" height="32" alt="">
+                  <div>
+                    <p class="notify__app">MUHAFIZ · şimdi</p>
+                    <p class="notify__title"><span data-notify-kind>DEPREM ALARMI</span> · A Blok</p>
+                    <p class="notify__body">Güvende misiniz?</p>
+                  </div>
+                </div>
+              </div>
+
+              <p class="residents" data-residents>
+                <span><span class="dot dot--safe" aria-hidden="true"></span>Güvende:&nbsp;<b data-r-safe>9</b>/12</span>
+                <span><span class="dot dot--warn" aria-hidden="true"></span>Yardım:&nbsp;<b data-r-help>1</b></span>
+                <span><span class="dot dot--muted" aria-hidden="true"></span>Yanıt bekleniyor:&nbsp;<b data-r-wait>2</b></span>
+              </p>
+
+              <ol class="log" data-log aria-label="Olay günlüğü">
+                <li><time>00:00.4</time>sensor_a 0.42g &gt; eşik</li>
+                <li><time>00:01.1</time>alarm açıldı · bina A</li>
+                <li><time>00:01.3</time>gaz_kes · elektrik_kes sinyali</li>
+                <li><time>00:01.9</time>asansör güvenli mod · kat 4</li>
+                <li><time>00:02.3</time>push gönderildi · 12 cihaz</li>
+                <li><time>00:12.6</time>güvende 9/12 · yardım 1 · bekleniyor 2</li>
+              </ol>
+            </div>
+          </div>
+          <p class="visually-hidden" aria-live="polite" data-sim-live></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CİHAZ ============ -->
+    <section class="section" id="cihaz" aria-labelledby="device-title">
+      <div class="container split">
+        <div>
+          <header class="section-head">
+            <p class="label label--blue">Cihaz</p>
+            <h2 id="device-title">Her binaya bir <span class="accent">Muhafız</span></h2>
+            <p class="section-head__lead">Binaya kurulan tek cihaz sarsıntıyı, sıcaklığı, aküyü ve şebekeyi izler. Kurulumda binaya atanır ve kendine özel gizli anahtarla sunucuya bağlanır.</p>
+          </header>
+          <dl class="specs">
+            <div class="spec"><dt><svg class="icon" aria-hidden="true"><use href="#i-cpu"/></svg>Beyin</dt><dd>ESP32 + 4G modem</dd></div>
+            <div class="spec"><dt><svg class="icon" aria-hidden="true"><use href="#i-quake"/></svg>Sarsıntı</dt><dd>2 sensör (A/B)</dd></div>
+            <div class="spec"><dt><svg class="icon" aria-hidden="true"><use href="#i-thermo"/></svg>Ölçüm</dt><dd>Sıcaklık, akü, şebeke</dd></div>
+            <div class="spec"><dt><svg class="icon" aria-hidden="true"><use href="#i-wifi"/></svg>Bağlantı</dt><dd>WiFi ana, 4G yedek</dd></div>
+            <div class="spec"><dt><svg class="icon" aria-hidden="true"><use href="#i-display"/></svg>Ön panel</dt><dd>Ekran + 2 LED</dd></div>
+            <div class="spec"><dt><svg class="icon" aria-hidden="true"><use href="#i-siren"/></svg>Uyarı</dt><dd>Yerel siren</dd></div>
+          </dl>
+        </div>
+
+        <figure class="unit" data-unit data-anim>
+          <div class="unit__head">
+            <img src="assets/img/muhafiz-symbol-dark.svg" width="32" height="37" alt="">
+            <div>
+              <p class="unit__name">MUHAFIZ Bina Ünitesi</p>
+              <p class="unit__sub">A Blok · cihaz başına gizli anahtar</p>
+            </div>
+            <span class="badge badge--online"><span class="dot dot--safe" aria-hidden="true"></span>ONLINE</span>
+          </div>
+          <ul class="leds">
+            <li class="led led--on"><span class="led__lamp" aria-hidden="true"></span>GÜÇ<span class="visually-hidden">: açık</span></li>
+            <li class="led led--pulse"><span class="led__lamp" aria-hidden="true"></span>SENSÖR<span class="visually-hidden">: ölçüyor</span></li>
+            <li class="led led--off" data-led-alarm><span class="led__lamp" aria-hidden="true"></span>ALARM<span class="visually-hidden" data-led-alarm-text>: sönük</span></li>
+            <li class="led led--on"><span class="led__lamp" aria-hidden="true"></span>4G<span class="visually-hidden">: hazır</span></li>
+          </ul>
+          <pre class="terminal" data-terminal><span class="t-row"><span class="t-key">SENSOR_A</span>  <span data-t="a">0.012g</span>        <span class="t-ok" data-t="a-st">OK</span></span>
+<span class="t-row"><span class="t-key">SENSOR_B</span>  <span data-t="b">0.010g</span>        <span class="t-ok" data-t="b-st">OK</span></span>
+<span class="t-row"><span class="t-key">LINK</span>      WIFI  <span data-t="rssi">-61dBm</span>  <span class="t-ok">OK</span></span>
+<span class="t-row"><span class="t-key">BACKUP</span>    4G    <span class="t-ok">ready</span></span>
+<span class="t-row"><span class="t-key">BATTERY</span>   %100  şebeke</span>
+<span class="t-row"><span class="t-key">LAST_SEEN</span> <span data-t="seen">2</span> sn önce</span></pre>
+          <figcaption class="unit__cap">Temsilî canlı veri. Değerler gösterim amaçlıdır.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ NASIL ÇALIŞIR ============ -->
+    <section class="section section--surface" id="nasil-calisir" aria-labelledby="how-title">
+      <div class="container">
+        <header class="section-head section-head--center">
+          <p class="label">Nasıl çalışır</p>
+          <h2 id="how-title">Sensörden telefona tek hat</h2>
+          <p class="section-head__lead">Uçtan uca bildirim hedefi: 10 saniyenin altı.</p>
+        </header>
+
+        <ol class="flow" data-anim>
+          <li class="flow__stop">
+            <span class="flow__icon"><svg class="icon" aria-hidden="true"><use href="#i-cpu"/></svg></span>
+            <span class="flow__seg" aria-hidden="true"><span class="flow__run"><span class="flow__dot"></span></span></span>
+            <h3>Cihaz</h3>
+            <p>Ölçüm ve olayları şifreli bağlantıyla sunucuya yollar.</p>
+          </li>
+          <li class="flow__stop">
+            <span class="flow__icon"><svg class="icon" aria-hidden="true"><use href="#i-server"/></svg></span>
+            <span class="flow__seg" aria-hidden="true"><span class="flow__run"><span class="flow__dot"></span></span></span>
+            <h3>Sunucu</h3>
+            <p>Eşikleri değerlendirir, alarmı açar, kaydeder; yalnızca o binanın kanalına bildirir.</p>
+          </li>
+          <li class="flow__stop">
+            <span class="flow__icon"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg></span>
+            <h3>Telefon</h3>
+            <p>Onaylı sakinlere siren sesli kritik bildirim; dokununca doğrudan alarm ekranı.</p>
+          </li>
+        </ol>
+
+        <div class="apps">
+          <article class="card card--wide">
+            <span class="card__icon"><svg class="icon" aria-hidden="true"><use href="#i-users"/></svg></span>
+            <h3 class="card__title">Yönetici paneli</h3>
+            <ul class="ticks">
+              <li>Yardım kuyruğu: üstlen, çöz, kapat</li>
+              <li>Harita: binalar, alarm noktası, yardım pinleri</li>
+              <li>Kat, daire veya bina seçerek bildirim gönderme</li>
+              <li>15 dakika yanıt vermeyen sakin “ulaşılamıyor” olarak işaretlenir</li>
+              <li>Yanlış alarmı “yanlış alarm” olarak kapatma</li>
+            </ul>
+          </article>
+        </div>
+
+        <p class="dealer">Bayi misiniz? Sipariş, kurulum ve bakım sözleşmeleri tek panelde. <a href="#teklif" data-role="bayi">Bayimiz olun<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
+      </div>
+    </section>
+
+    <!-- ============ SAKİN UYGULAMASI ============
+         Telefon ekranı, mobil uygulamadaki gerçek yerleşimden çizildi:
+         alarm_screen.dart (alarm), help_sheet.dart (yardım), emergency_share.dart
+         (acil kişiler). JS yokken yalnızca alarm ekranı görünür. -->
+    <section class="section app-section" id="uygulama" aria-labelledby="app-title">
+      <div class="container split split--app">
+        <div>
+          <header class="section-head">
+            <p class="label label--emerald">Mobil uygulama</p>
+            <h2 id="app-title">Binanız <span class="accent">cebinizde</span></h2>
+            <p class="section-head__lead">Alarm anında bildirime dokunan sakin doğrudan alarm ekranına gelir: sistemin yaptığı işlemleri görür, tek dokunuşla güvende olduğunu bildirir ya da yardım ister.</p>
+          </header>
+          <ul class="features">
+            <li><span class="features__icon"><svg class="icon" aria-hidden="true"><use href="#i-building"/></svg></span>Bina durumu: deprem, yangın, gaz, elektrik, asansör</li>
+            <li><span class="features__icon"><svg class="icon" aria-hidden="true"><use href="#i-bell"/></svg></span>Bildirime dokununca doğrudan alarm ekranı</li>
+            <li><span class="features__icon"><svg class="icon" aria-hidden="true"><use href="#i-sos"/></svg></span>SOS: 8 yardım tipi, konum, iptal ve takip</li>
+            <li><span class="features__icon"><svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg></span>En fazla 5 acil kişiye SMS / WhatsApp ile haber</li>
+            <li><span class="features__icon"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg></span>Bildirim geçmişi ve afet talimatları</li>
+            <li><span class="features__icon"><svg class="icon" aria-hidden="true"><use href="#i-wifi"/></svg></span>İnternet yokken son bilinen durum</li>
+          </ul>
+          <p class="tag app-section__tag">Android ve iOS · Mağaza yayını hazırlanıyor</p>
+          <p class="app-section__mgr">Yöneticiler yardım kuyruğunu, haritayı ve bina durumunu aynı uygulamadan yönetir.</p>
+        </div>
+
+        <div class="phone-stage" data-phone-stage>
+          <div class="phone-tilt" data-phone-tilt>
+            <div class="phone" data-phone data-screen="alarm">
+              <div class="phone__screen">
+                <span class="phone__notch" aria-hidden="true"></span>
+
+                <!-- Alarm ekranı (alarm_screen.dart) -->
+                <div class="app" data-app-main>
+                  <div class="app-bar">
+                    <svg class="icon" aria-hidden="true"><use href="#i-back"/></svg>
+                    <span>Acil Durum</span>
+                  </div>
+                  <div class="app-body">
+                    <div class="alarm-card">
+                      <p class="alarm-card__title" data-phone-kind>DEPREM ALARMI</p>
+                      <p class="alarm-card__bldg">A Blok</p>
+                    </div>
+                    <p class="app-h">Sistemin yaptığı işlemler</p>
+                    <ul class="sys-list">
+                      <li><span class="sdot sdot--safe" aria-hidden="true"></span><span>Asansör</span><b>Güvenli katta</b></li>
+                      <li><span class="sdot sdot--alarm" aria-hidden="true"></span><span>Elektrik</span><b>Kesildi</b></li>
+                      <li><span class="sdot sdot--alarm" aria-hidden="true"></span><span>Doğalgaz</span><b>Kesildi</b></li>
+                      <li><span class="sdot sdot--safe" aria-hidden="true"></span><span>Yangın</span><b>NORMAL</b></li>
+                    </ul>
+                    <p class="app-p">Lütfen güvenli bölgeye geçin ve talimatları izleyin.</p>
+                    <button class="app-outline" type="button" tabindex="-1" aria-disabled="true"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg>Acil Durum Talimatları</button>
+                    <button class="app-outline" type="button" tabindex="-1" aria-disabled="true"><svg class="icon" aria-hidden="true"><use href="#i-users"/></svg>Acil Kişilere Haber Ver (SMS/WhatsApp)</button>
+                    <div class="app-actions">
+                      <button class="app-btn app-btn--safe" type="button" data-go="safe">Güvendeyim</button>
+                      <button class="app-btn app-btn--help" type="button" data-go="help">Yardım</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Güvendeyim → SnackBar -->
+                <p class="snackbar layer" data-layer="safe">Güvende olarak işaretlendiniz.</p>
+
+                <div class="scrim layer" data-layer="help confirm sent" aria-hidden="true"></div>
+
+                <!-- Yardım → alt sayfa (help_sheet.dart) -->
+                <div class="sheet layer" data-layer="help confirm" role="group" aria-label="Yardım Talebi">
+                  <p class="sheet__title">Yardım Talebi</p>
+                  <div class="chips" role="group" aria-label="Yardım tipi">
+                    <button class="chip" type="button" aria-pressed="false">Göçük altında kaldım</button>
+                    <button class="chip" type="button" aria-pressed="false">Yangın nedeniyle mahsur kaldım</button>
+                    <button class="chip" type="button" aria-pressed="false">Çıkamıyorum</button>
+                    <button class="chip" type="button" aria-pressed="false">Asansörde mahsur kaldım</button>
+                    <button class="chip" type="button" aria-pressed="false">Duman/gaz nedeniyle çıkamıyorum</button>
+                    <button class="chip" type="button" aria-pressed="false">Tıbbi yardıma ihtiyacım var</button>
+                    <button class="chip" type="button" aria-pressed="false">Çocuk / yaşlı / engelli için yardım</button>
+                    <button class="chip" type="button" aria-pressed="false">Diğer</button>
+                  </div>
+                  <div class="switch-row">
+                    <div><p id="loc-label">Konumumu paylaş</p><p class="switch-row__sub">Yalnızca bu talep için</p></div>
+                    <button class="switch" type="button" role="switch" aria-checked="false" aria-labelledby="loc-label" data-loc></button>
+                  </div>
+                  <button class="app-btn app-btn--help app-btn--block" type="button" data-send disabled>YARDIM TALEBİ GÖNDER</button>
+                </div>
+
+                <!-- Çift onay: Flutter'daki gibi kendi karartmasıyla alt sayfanın da üstünde -->
+                <div class="scrim scrim--dialog layer" data-layer="confirm" aria-hidden="true"></div>
+                <div class="dialog layer" data-layer="confirm" role="group" aria-label="Emin misiniz?">
+                  <p class="dialog__title">Emin misiniz?</p>
+                  <p class="dialog__text">Gerçekten yardım talebi göndermek istiyor musunuz?<br><span data-help-label></span></p>
+                  <div class="dialog__actions">
+                    <button class="app-text-btn" type="button" data-go="help">Vazgeç</button>
+                    <button class="app-btn app-btn--plain" type="button" data-go="sent">Evet, Gönder</button>
+                  </div>
+                </div>
+
+                <!-- Gönderildi → acil kişilere haber ver (emergency_share.dart) -->
+                <div class="sheet layer" data-layer="sent" role="group" aria-label="Acil Kişilere Haber Ver">
+                  <p class="sheet__title">Acil Kişilere Haber Ver</p>
+                  <p class="sheet__sub">2 acil kişiye bu telefondan gönderilir.</p>
+                  <div class="share-row">
+                    <button class="app-btn app-btn--plain" type="button" tabindex="-1" aria-disabled="true"><svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg>Tümüne SMS</button>
+                    <button class="app-btn app-btn--safe" type="button" tabindex="-1" aria-disabled="true"><svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg>Tümüne WhatsApp</button>
+                  </div>
+                  <button class="app-btn app-btn--help app-btn--block" type="button" tabindex="-1" aria-disabled="true" data-share-main>SMS ile Haber Ver (önerilen)</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="phone-controls" role="group" aria-label="Telefon ekranı seçimi">
+            <button class="btn btn--toggle btn--sm" type="button" data-go="alarm" aria-pressed="true">Alarm</button>
+            <button class="btn btn--toggle btn--sm" type="button" data-go="safe" aria-pressed="false">Güvendeyim</button>
+            <button class="btn btn--toggle btn--sm" type="button" data-go="help" aria-pressed="false">Yardım</button>
+            <button class="phone-reset" type="button" data-go="alarm" hidden>Başa dön</button>
+          </div>
+          <p class="phone-caption">Uygulamadaki ekranların temsilî görünümü.</p>
+          <p class="visually-hidden" aria-live="polite" data-phone-live></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TEKLİF ============ -->
+    <section class="section" id="teklif" aria-labelledby="quote-title">
+      <div class="container split split--form">
+        <div>
+          <header class="section-head">
+            <p class="label label--teal">Teklif</p>
+            <h2 id="quote-title">Binanız için ücretsiz keşif ve teklif</h2>
+            <p class="section-head__lead">Formu doldurun; binanızı birlikte değerlendirip size özel teklif hazırlayalım.</p>
+          </header>
+          <ul class="contact-list">
+            <li><svg class="icon" aria-hidden="true"><use href="#i-call"/></svg><a href="tel:[TELEFON]">[TELEFON]</a></li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg><a href="mailto:[ILETISIM_EPOSTA]">[ILETISIM_EPOSTA]</a></li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><span>[ADRES]</span></li>
+          </ul>
+          <p class="note">Form çalışmazsa bu telefon ve e-postadan doğrudan ulaşabilirsiniz.</p>
+        </div>
+
+        <form class="form card" action="contact.php" method="post" data-form>
+          <div class="form__grid">
+            <div class="field">
+              <label for="f-name">Ad soyad</label>
+              <input id="f-name" name="name" type="text" autocomplete="name" required maxlength="100" aria-describedby="e-name">
+              <p class="field__error" id="e-name" data-error-for="name"></p>
+            </div>
+            <div class="field">
+              <label for="f-phone">Telefon</label>
+              <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required pattern="[0-9 +()\-]{10,20}" maxlength="20" aria-describedby="e-phone">
+              <p class="field__error" id="e-phone" data-error-for="phone"></p>
+            </div>
+            <div class="field">
+              <label for="f-email">E-posta</label>
+              <input id="f-email" name="email" type="email" autocomplete="email" required maxlength="150" aria-describedby="e-email">
+              <p class="field__error" id="e-email" data-error-for="email"></p>
+            </div>
+            <div class="field">
+              <label for="f-role">Rolünüz</label>
+              <select id="f-role" name="role" required aria-describedby="e-role">
+                <option value="">Seçin</option>
+                <option value="yonetici">Site / bina yöneticisi</option>
+                <option value="bayi">Bayi adayı</option>
+                <option value="muteahhit">Müteahhit</option>
+                <option value="diger">Diğer</option>
+              </select>
+              <p class="field__error" id="e-role" data-error-for="role"></p>
+            </div>
+            <div class="field">
+              <label for="f-type">Bina tipi</label>
+              <select id="f-type" name="building_type" required aria-describedby="e-type">
+                <option value="">Seçin</option>
+                <option value="apartman">Apartman / site</option>
+                <option value="ticari">Ticari</option>
+                <option value="kamu">Kamu</option>
+                <option value="diger">Diğer</option>
+              </select>
+              <p class="field__error" id="e-type" data-error-for="building_type"></p>
+            </div>
+            <div class="field">
+              <label for="f-units">Blok ve daire sayısı <span class="field__opt">(isteğe bağlı)</span></label>
+              <input id="f-units" name="units" type="text" maxlength="60" placeholder="Örn. 2 blok, 48 daire">
+            </div>
+            <div class="field field--full">
+              <label for="f-city">Şehir / ilçe</label>
+              <input id="f-city" name="city" type="text" autocomplete="address-level2" required maxlength="80" aria-describedby="e-city">
+              <p class="field__error" id="e-city" data-error-for="city"></p>
+            </div>
+            <div class="field field--full">
+              <label for="f-msg">Mesaj <span class="field__opt">(isteğe bağlı)</span></label>
+              <textarea id="f-msg" name="message" rows="4" maxlength="2000"></textarea>
+            </div>
+            <div class="field field--full field--check">
+              <input id="f-kvkk" name="kvkk" type="checkbox" value="1" required aria-describedby="e-kvkk">
+              <label for="f-kvkk"><a href="gizlilik.html" target="_blank" rel="noopener">Aydınlatma Metni</a>’ni okudum; bilgilerimin bu talep için işlenmesini kabul ediyorum.</label>
+              <p class="field__error" id="e-kvkk" data-error-for="kvkk"></p>
+            </div>
+            <!-- Bal küpü: insan görmez; doluysa sunucu reddeder. -->
+            <div class="hp" aria-hidden="true">
+              <label for="f-website">Web siteniz</label>
+              <input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off">
+            </div>
+            <input type="hidden" name="elapsed" value="" data-elapsed>
+          </div>
+          <div class="form__footer">
+            <button class="btn btn--primary" type="submit" data-submit><span class="spinner" aria-hidden="true"></span><span data-submit-label>Teklif iste</span></button>
+            <p class="form__status" role="status" aria-live="polite" data-form-status></p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ============ SSS ============ -->
+    <section class="section section--surface" id="sss" aria-labelledby="faq-title">
+      <div class="container container--narrow">
+        <header class="section-head section-head--center">
+          <p class="label">SSS</p>
+          <h2 id="faq-title">Sık sorulan sorular</h2>
+        </header>
+        <div class="faq">
+          <details class="faq__item">
+            <summary>Binanın interneti kesilirse ne olur?</summary>
+            <div class="faq__body">
+              <p>Cihaz WiFi’yi ana hat, 4G’yi yedek hat olarak kullanır; WiFi kesildiğinde 4G üzerinden bağlanır. Cihazın üzerinde yerel bir siren vardır. 5 dakika veri göndermeyen cihaz çevrimdışı olarak işaretlenir ve yöneticiye haber gider.</p>
+              <p>İki bağlantı birden kesildiğinde sirenin cihazda yerel olarak çalışıp çalışmadığı: [DOĞRULANACAK]</p>
+            </div>
+          </details>
+          <details class="faq__item">
+            <summary>Elektrik kesilirse?</summary>
+            <div class="faq__body">
+              <p>Cihaz şebeke elektriğini ve akü durumunu sürekli izler.</p>
+              <p>Kesinti sırasında cihazın aküyle ne kadar süre çalıştığı: [DOĞRULANACAK]</p>
+            </div>
+          </details>
+          <details class="faq__item">
+            <summary>Yanlış alarm olursa?</summary>
+            <div class="faq__body">
+              <p>Her alarm dört aşamadan geçer: algılandı, bildirildi, yönetici üstlendi, sona erdi. Yönetici, gerçek olmayan bir alarmı panelden “yanlış alarm” olarak kapatır.</p>
+            </div>
+          </details>
+          <details class="faq__item">
+            <summary>Kimler bildirim alır?</summary>
+            <div class="faq__body">
+              <p>Yalnızca alarmın geldiği binanın onaylı sakinleri. Her cihaz tek bir binaya bağlıdır (1 : 1) ve bildirim yalnızca o binanın kanalına gönderilir.</p>
+            </div>
+          </details>
+          <details class="faq__item">
+            <summary>Uygulamayı nereden indirebilirim?</summary>
+            <div class="faq__body">
+              <p>Uygulama Android ve iOS için geliştirildi. App Store ve Google Play yayını hazırlanıyor.</p>
+            </div>
+          </details>
+          <details class="faq__item">
+            <summary>Kişisel verilerim nasıl korunuyor?</summary>
+            <div class="faq__body">
+              <p>Uygulamada KVKK onayı alınır. Verilere erişim rol bazlı yetkiyle sınırlıdır, bağlantılar şifrelidir ve kritik işlemler denetim kaydına yazılır. Bu sitedeki form için <a href="gizlilik.html">Aydınlatma Metni</a>’ne bakabilirsiniz.</p>
+              <p>Verilerin barındırıldığı yer ve saklama süreleri: [DOĞRULANACAK]</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div class="site-footer__brand">
+        <img src="assets/img/muhafiz-logo-dark.svg" width="168" height="50" alt="MUHAFIZ" loading="lazy">
+        <p>Binalar için erken uyarı, otomatik güvenlik ve acil durum haberleşme sistemi.</p>
+      </div>
+      <address class="site-footer__col">
+        <a href="tel:[TELEFON]">[TELEFON]</a>
+        <a href="mailto:[ILETISIM_EPOSTA]">[ILETISIM_EPOSTA]</a>
+        <span>[ADRES]</span>
+      </address>
+      <ul class="site-footer__col">
+        <li><a href="gizlilik.html">Gizlilik / KVKK</a></li>
+        <li><a href="https://panel.muhafiz.site" rel="noopener">Panel girişi</a></li>
+      </ul>
+      <p class="site-footer__copy">© 2026 MUHAFIZ</p>
+    </div>
+  </footer>
+</body>
+</html>
